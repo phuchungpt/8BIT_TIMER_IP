@@ -1,6 +1,5 @@
-../rtl/apb_slave.v 
-../rtl/register.v 
-../rtl/interrupt.v
-../rtl/counter_control.v
-../rtl/counter.v
+../rtl/timer_register.v 
+../rtl/timer_clock_divisor.v 
+../rtl/timer_interrupt.v
+../rtl/timer_counter.v
 ../rtl/timer_top.v
