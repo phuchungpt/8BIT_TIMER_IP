@@ -41,6 +41,42 @@ class counter_up_divide_by_2_test extends base_test;
       $display("%0t: [counter_up_divide_by_2_test] FAIL: %0d <= exp_cycle <= %0d, act_cycle = %0d", $time, data_min, data_max, total_cycle ); 
       err_cnt++;
     end
+
+    total_cycle = 0;
+    
+    // Write 1 to clear TSR 
+    write(8'h01, 8'h01);
+
+    // Read back
+    read (8'h01, 8'h00, pkt.data);
+    
+    // Write random data to TDR
+    data = $urandom; 
+    write(8'h02, data);
+    
+    // Stop counter and load data to TDR
+    write(8'h00, 8'h00);
+    write(8'h00, 8'h04);
+    
+    // Set count up write(8'h00, 8'h08);
+    write(8'h00, 8'h09); 
+
+    while(dut_vif.interrupt == 0) begin
+      @(posedge dut_vif.ker_clk);
+      total_cycle++;
+    end
+    
+    $display("%0t: [counter_up_divide_by_2_test] Interrupt is asserted after 0d clock cyclces", $time, total_cycle);
+    
+    data_min = (240 - (int'(data)))*2;
+    data_max = (260 - (int'(data)))*2;
+    
+    if(total_cycle >= data_min && total_cycle <= data_max) begin
+      $display("%0t: [counter_up_divide_by_2_test] PASS: %0 <= exp_cycle <= %0d, act_cycle = %0d", $time, data_min, data_max, total_cycle); 
+    end else begin
+      $display("%0t: [counter_up_divide_by_2_test] FAIL: %0 <= exp_cycle <= %0d, act_cycle = %0d", $time, data_min, data_max, total_cycle ); 
+      err_cnt++;
+    end 
   endtask
 endclass
     
