@@ -70,3 +70,4 @@ class clock_divide_by_2_test extends base_test;
     err_cnt++;
   end
 endtask
+endclass 
