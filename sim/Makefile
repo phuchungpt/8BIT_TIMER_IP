@@ -1,5 +1,5 @@
 ##########################################################
-#This file created by Huy Nguyen 
+#This file was created by Phuc Hung based on a template from Huy Nguyen
 #Updated date: 9/30/2024
 ##########################################################
 
