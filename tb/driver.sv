@@ -1,9 +1,11 @@
 class driver;
-  mailbox #(packet) s2d_mb; virtual dut if dut_vif;
+  mailbox #(packet) s2d_mb; 
+  virtual dut_if dut_vif;
   event xfer_done;
   
   function new(virtual dut_if dut_vif, mailbox #(packet) s2d_mb);
-    this.dut_vif = dut vif; this.s2d_mb = s2d_mb ;
+    this.dut_vif = dut vif; 
+    this.s2d_mb = s2d_mb ;
   endfunction
   
   task run();
